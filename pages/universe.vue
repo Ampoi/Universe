@@ -15,21 +15,16 @@
                         Drop your piece of imagination
                     </div>
                 </div>
-                <div
+                <NoteArea
                     v-if="isWriting"
-                    class="absolute w-full top-1/2 -translate-y-1/2 left-0 p-4 flex flex-col gap-4">
-                    <textarea
-                        v-model="note"
-                        class="text-center outline-none bg-transparent text-white basis-20"/>
-                    <button class="text-white bg-gradient-to-b from-white/15 to-white/10 p-2 border-white/10 border-[1px] rounded-lg via-30%">Submit</button>
-                </div>
+                    v-model:writing="isWriting"/>
             </SwiperSlide>
             <SwiperSlide>
                 vvv
             </SwiperSlide>
         </Swiper>
         <button
-            class="grid place-content-center size-12 text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] rounded-lg via-30% top-4 left-4 absolute z-10"
+            class="grid place-content-center size-12 text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] rounded-lg via-30% bottom-8 left-4 absolute z-10"
             @click="showModal = true">
             ...
         </button>
@@ -38,8 +33,6 @@
 </template>
 <script setup lang="ts">
 const isWriting = ref(false)
-const note = ref("")
-
 const showModal = ref(false)
 
 definePageMeta({
