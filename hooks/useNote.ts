@@ -29,5 +29,15 @@ export const useNote = () => {
         })
     }
 
-    return { createNote }
+    const getAllNotes = async () => {
+        return await notesCollection.getAll({
+            must: [
+                { uid }
+            ],
+            with_payload: false,
+            with_vector: true
+        })
+    }
+
+    return { createNote, getAllNotes }
 }

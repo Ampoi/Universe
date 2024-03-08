@@ -1,7 +1,7 @@
 <template>
     <div
         v-if="show"
-        class="absolute top-0 left-0 w-screen h-screen z-20">
+        class="absolute top-0 left-0 w-screen h-dvh z-20">
         <div
             class="absolute top-0 left-0 w-full h-full bg-black/20 backdrop-blur-md"
             @click="show = false"/>
@@ -28,7 +28,7 @@
                 <div
                     v-else
                     class="flex flex-row gap-4 items-center">
-                    hey! you don't login!!
+                    hey! you are't logged in!!
                 </div>
             </div>
         </div>

@@ -3,7 +3,7 @@ export default {
   content: [],
   theme: {
     fontFamily: {
-      serif: ['"Bodoni Moda"']
+      serif: ['"Gilda Display"']
     },
     extend: {},
   },
