@@ -4,7 +4,11 @@
             <div class="flex flex-col items-center">
                 <h1 class="italic font-semibold text-7xl font-serif">Universe.</h1>
                 <p class="font-serif">An app to save your thoughts.</p>
-                <button class="font-semibold py-2 px-4 bg-black text-white rounded-md mt-4">Get Started</button>
+                <NuxtLink
+                    class="font-semibold py-2 px-4 bg-black text-white rounded-md mt-4"
+                    to="/login">
+                    Get Started
+                </NuxtLink>
             </div>
         </div>
     </main>
