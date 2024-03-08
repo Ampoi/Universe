@@ -9,8 +9,9 @@ const usersRef = doc(db, `users/${auth.currentUser.uid}`)
 export const createRepository = <T extends Record<string, any>>(name: string) => {
     const ref = collection(usersRef, name)
     return {
-        add(value: T){
-            addDoc(ref, value)
+        async add(value: T){
+            const doc = await addDoc(ref, value)
+            return doc
         }
     }
 }

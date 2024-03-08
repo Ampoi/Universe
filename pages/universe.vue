@@ -10,9 +10,9 @@
                     class="absolute w-full h-full top-0 left-0"
                     @click="isWriting = !isWriting">
                     <div
-                        class="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-white font-serif text-5xl text-center"
+                        class="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-white/60 font-serif text-5xl text-center leading-[56px]"
                         v-if="!isWriting">
-                        Drop your piece of imagination
+                        Drop piece of your imagination
                     </div>
                 </div>
                 <NoteArea

@@ -12,9 +12,8 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    historyImageApiUrl: "",
+    openaiApiKey: "",
     public: {
-      historyImageFolderName: "2023年度",
       firebaseConfig: {
         apiKey: "",
         authDomain: "",
