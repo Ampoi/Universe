@@ -1,5 +1,8 @@
 import { notesRepository } from "~/infra/notesRepository"
 import { useAuth } from "./useAuth"
+import { notesCollection } from "~/infra/notesCollection"
+
+import { v4 as generateUUID } from "uuid"
 
 export const useNote = () => {
     const { auth } = useAuth()
@@ -7,15 +10,23 @@ export const useNote = () => {
     const { uid } = auth.currentUser
 
     const createNote = async (content: string) => {
-        const doc = await notesRepository.add({
-            content,
-            createdAt: new Date()
+        const id = generateUUID()
+        const [embedding] = await Promise.all([
+            await $fetch("/api/createEmbedding", {
+                method: "POST",
+                body: { content }
+            }),
+            await notesRepository.set(id, {
+                content,
+                createdAt: new Date()
+            })  
+        ])
+
+        await notesCollection.createPoints({
+            id,
+            vector: embedding,
+            payload: { uid }
         })
-        const embedding = await $fetch("/api/createEmbedding", {
-            method: "POST",
-            body: { content }
-        })
-        console.log(embedding)
     }
 
     return { createNote }

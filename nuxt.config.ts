@@ -14,6 +14,9 @@ export default defineNuxtConfig({
   runtimeConfig: {
     openaiApiKey: "",
     public: {
+      qdrant: {
+        url: ""
+      },
       firebaseConfig: {
         apiKey: "",
         authDomain: "",

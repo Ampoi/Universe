@@ -10,15 +10,18 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@qdrant/js-client-rest": "^1.8.0",
     "firebase": "^10.8.1",
     "nuxt": "^3.10.3",
     "nuxt-swiper": "^1.2.2",
     "openai": "^4.28.4",
+    "uuid": "^9.0.1",
     "vue": "^3.4.19",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.11.4",
+    "@types/uuid": "^9.0.8",
     "nuxt-icon": "^0.6.9"
   }
 }
