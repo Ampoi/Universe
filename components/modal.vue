@@ -5,7 +5,7 @@
         <div
             class="absolute top-0 left-0 w-full h-full bg-black/20 backdrop-blur-md"
             @click="show = false"/>
-        <div class="text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] absolute bottom-0 left-0 w-full z-10 p-4 rounded-t-3xl">
+        <div class="text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] absolute bottom-0 left-0 w-full z-10 p-4 pb-12 rounded-t-3xl">
             <div class="p-4 bg-white/5 border-white/10 border-[1px] rounded-xl">
                 <div
                     v-if="user"
