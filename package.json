@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@qdrant/js-client-rest": "^1.8.0",
+    "@saehrimnir/druidjs": "^0.7.3",
     "firebase": "^10.8.1",
     "nuxt": "^3.10.3",
     "openai": "^4.28.4",

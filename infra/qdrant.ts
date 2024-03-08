@@ -30,10 +30,8 @@ export const createCollection = <T extends Record<string, any>>( collectionName:
                 points
             })
         },
-        async getAll(filter: Record<string, any>){
-            return await qdrantClient.scroll(collectionName, {
-                filter
-            })
+        async getAll(setting: Record<string, any>){
+            return await qdrantClient.scroll(collectionName, setting)
         }
     }
 }

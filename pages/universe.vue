@@ -6,7 +6,14 @@
             :class="{
                 '-translate-y-[calc(100vh-10rem)]': !isLookingUp
             }">
-            <div class="h-[calc(100vh-10rem)]">
+            <div class="h-[calc(100vh-10rem)] w-full relative">
+                <div
+                    v-for="star in noteStars"
+                    class="size-0.5 rounded-full absolute bg-white -translate-x-1/2 -translate-y-1/2"
+                    :style="{
+                        left: `calc(${star.x}px + 50%)`,
+                        top: `calc(${star.y}px + 50%)`
+                    }"/>
             </div>
             <button
                 class="font-serif text-white/30 italic text-2xl py-4"
@@ -41,10 +48,25 @@
     </main>
 </template>
 <script setup lang="ts">
+import { useNote } from '~/hooks/useNote';
+
 const isWriting = ref(false)
 const showModal = ref(false)
 
+
 const isLookingUp = ref(false)
+const { getAllNoteStars } = useNote()
+const noteStars = ref<{
+    id: string | number;
+    x: number;
+    y: number;
+}[]>([])
+
+watch(isLookingUp, async (newValue) => {
+    if( newValue ){
+        noteStars.value = await getAllNoteStars()
+    }
+})
 
 definePageMeta({
   middleware: ["auth"]
