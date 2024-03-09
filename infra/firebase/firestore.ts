@@ -1,4 +1,4 @@
-import { addDoc, collection, doc, getFirestore, setDoc } from "firebase/firestore"
+import { addDoc, collection, doc, getDoc, getFirestore, setDoc } from "firebase/firestore"
 import { useAuth } from "~/hooks/useAuth"
 
 const db = getFirestore()
@@ -15,6 +15,9 @@ export const createRepository = <T extends Record<string, any>>(name: string) =>
         //},
         async set(id: string, value: T){
             await setDoc(doc(ref, id), value)
+        },
+        async get(id: string){
+            return (await getDoc(doc(ref, id))).data() as T
         }
     }
 }

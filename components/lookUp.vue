@@ -10,14 +10,12 @@
             @touchmove="onTouchMove"
             @touchend="endTouching"
             @touchcancel="endTouching">
-            <div
+            <Star
                 v-for="star in noteStars"
-                class="size-0.5 rounded-full absolute bg-white -translate-x-1/2 -translate-y-1/2"
-                :style="{
-                    left: `calc(${(star.x - starCenter.x) * magnificationRate}px + 50%)`,
-                    top:  `calc(${(star.y - starCenter.y) * magnificationRate}px + 50%)`,
-                    scale: starSize.showSize
-                }"/>
+                :star="star"
+                :magnification-rate="magnificationRate"
+                :star-center="starCenter"
+                :movable-area="movableArea"/>
         </div>
         <button
             class="font-serif text-white/40 italic text-2xl py-4"
@@ -28,29 +26,18 @@
 </template>
 <script setup lang="ts">
 import { useNote } from '~/hooks/useNote';
+import type { NoteStar } from '~/models/note';
 
 const isLookingUp = defineModel<boolean>("show", { required: true })
 
 const { getAllNoteStars } = useNote()
-const noteStars = ref<{
-    id: string | number;
-    x: number;
-    y: number;
-}[]>([])
+
+const noteStars = ref<NoteStar[]>([])
+
 const starCenter = reactive({x: 0, y: 0})
 const magnificationRate = ref(1)
 const movableArea = ref<HTMLElement>()
 const movableAreaPadding = 80
-
-const starSize = computed(() => {
-    const size = magnificationRate.value ** 0.5
-    const min = 1
-    const max = 10
-    return {
-        size,
-        showSize: size < min ? min : max < size ? max : size
-    }
-})
 
 watch(isLookingUp, async (newValue) => {
     if( newValue ){

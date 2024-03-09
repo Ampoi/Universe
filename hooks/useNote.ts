@@ -5,6 +5,7 @@ import { notesCollection } from "~/infra/notesCollection"
 import { v4 as generateUUID } from "uuid"
 
 import * as druid from "@saehrimnir/druidjs";
+import type { NoteStar } from "~/models/note";
 
 export const useNote = () => {
     const { auth } = useAuth()
@@ -31,7 +32,12 @@ export const useNote = () => {
         })
     }
 
-    const getAllNoteStars = async () => {
+    const getNote = async (id: string) => {
+        const note = await notesRepository.get(id)
+        return note
+    }
+
+    const getAllNoteStars = async (): Promise<NoteStar[]> => {
         const { points } = await notesCollection.getAll({
             filter: {
                 must: [
@@ -55,6 +61,7 @@ export const useNote = () => {
 
         const notes = points.map((point, i) => {
             const embed = embeds[i]
+            if( typeof point.id != "string" ) throw new Error("idがStringじゃないです！")
             return {
                 id: point.id,
                 x: embed[0],
@@ -65,5 +72,5 @@ export const useNote = () => {
         return notes
     }
 
-    return { createNote, getAllNoteStars }
+    return { createNote, getNote, getAllNoteStars }
 }
