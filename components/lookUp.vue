@@ -133,7 +133,7 @@ function onTouchMove(event: TouchEvent){
                 (toucheMovements[1].following.y - toucheMovements[0].following.y) ** 2
             )
             const newMagnificationRate = magnificationRate.value * followingLength / previousLength
-            const magnificationRateMax = 400
+            const magnificationRateMax = 100
             const magnificationRateMin = 1
             magnificationRate.value =
                 newMagnificationRate < magnificationRateMin ?

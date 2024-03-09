@@ -28,7 +28,7 @@ const props = defineProps<{
 }>()
 
 const starSize = computed(() => {
-    const size = props.magnificationRate ** 0.5
+    const size = props.magnificationRate
     const min = 1
     return size < min ? min : size
 })
@@ -41,7 +41,7 @@ const showText = computed(() => {
         (props.star.y - props.starCenter.y) * props.magnificationRate <= starSize.value + props.movableArea.clientHeight / 2
     )
 
-    return isInScreen && 15 < starSize.value
+    return isInScreen && 8 < starSize.value
 })
 
 const note = ref<Note>()
