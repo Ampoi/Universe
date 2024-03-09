@@ -1,6 +1,6 @@
 <template>
     <main
-        class="w-screen h-dvh relative bg-gradient-to-t from-blue-950 to-black">
+        class="w-screen h-dvh relative bg-gradient-to-t from-blue-500 via-30% via-blue-950 to-black">
         <LookUp v-model:show="isLookingUp"/>
         <div
             class="absolute w-full h-full top-0 left-0"
@@ -12,7 +12,7 @@
                 }
             }">
             <div
-                class="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-white/10 font-serif text-5xl text-center leading-[56px]"
+                class="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-white/30 font-serif text-5xl text-center leading-[56px]"
                 v-if="!isWriting">
                 Click here to drop piece of your imagination
             </div>
