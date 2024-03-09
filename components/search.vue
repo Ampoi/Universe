@@ -23,7 +23,9 @@
             <input
                 class="outline-none bg-transparent p-4 pr-0 text-center grow h-full"
                 type="text"
-                v-model="searchPrompt">
+                v-model="searchPrompt"
+                @focusin="emit('updateFocus', true)"
+                @focusout="emit('updateFocus', false)">
             <div class="p-2">
                 <button
                     v-if="searchPrompt != ''"
@@ -40,6 +42,10 @@
 <script setup lang="ts">
 import { useNote } from '~/hooks/useNote';
 import type { Note } from '~/models/note';
+
+const emit = defineEmits<{
+    (e: "updateFocus", isFocused: boolean): void
+}>()
 
 const searchPrompt = ref("")
 watch(searchPrompt, () => {

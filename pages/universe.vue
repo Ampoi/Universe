@@ -23,10 +23,12 @@
         <div class="bottom-8 absolute z-10 px-4 w-full flex flex-row gap-4 h-12">
             <button
                 class="grid place-content-center basis-12 text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] rounded-lg via-30%"
-                @click="showModal = true">
+                @click="showModal = true"
+                v-if="!isSearching">
                 ...
             </button>
-            <Search/>
+            <Search
+                @update-focus="(isFocused) => isSearching = isFocused"/>
         </div>
         <Modal v-model:show="showModal"/>
     </main>
@@ -36,6 +38,7 @@ const isWriting = ref(false)
 const showModal = ref(false)
 
 const isLookingUp = ref(false)
+const isSearching = ref(false)
 
 definePageMeta({
   middleware: ["auth"]
