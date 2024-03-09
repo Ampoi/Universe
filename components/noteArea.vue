@@ -18,7 +18,7 @@ import { useNote } from '~/hooks/useNote';
 const isWriting = defineModel<boolean>("writing", { required: true })
 const note = ref("")
 
-const { createNote } = useNote()
+const { create: createNote } = useNote()
 
 const noteArea = ref<HTMLTextAreaElement>()
 onMounted(() => {

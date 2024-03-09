@@ -32,6 +32,15 @@ export const createCollection = <T extends Record<string, any>>( collectionName:
         },
         async getAll(setting: Record<string, any>){
             return await qdrantClient.scroll(collectionName, setting)
+        },
+        async searchSimilar(
+            vector: number[],
+            limit: number
+        ){
+            return await qdrantClient.search(collectionName, {
+                vector,
+                limit
+            })
         }
     }
 }

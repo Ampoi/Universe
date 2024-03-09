@@ -45,7 +45,7 @@ const showText = computed(() => {
 })
 
 const note = ref<Note>()
-const { getNote } = useNote()
+const { get: getNote } = useNote()
 watch(showText, async (newValue) => {
     if( newValue ){
         note.value = await getNote(props.star.id)

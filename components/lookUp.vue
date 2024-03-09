@@ -1,6 +1,6 @@
 <template>
     <div
-        class="absolute w-full flex flex-col rounded-b-3xl z-20 transition-all duration-300 bg-black"
+        class="absolute w-full flex flex-col rounded-b-3xl z-20 transition-all duration-300 bg-black/60 backdrop-blur-lg border-x-[1px] border-b-[1px] border-black"
         :class="{
             '-translate-y-[calc(100dvh-10rem)]': !isLookingUp
         }">
@@ -30,7 +30,7 @@ import type { NoteStar } from '~/models/note';
 
 const isLookingUp = defineModel<boolean>("show", { required: true })
 
-const { getAllNoteStars } = useNote()
+const { getAllStars: getAllNoteStars } = useNote()
 
 const noteStars = ref<NoteStar[]>([])
 

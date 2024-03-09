@@ -12,7 +12,7 @@ export const useNote = () => {
     if( !auth.currentUser ) throw new Error("ログインしていません")
     const { uid } = auth.currentUser
 
-    const createNote = async (content: string) => {
+    const create = async (content: string) => {
         const id = generateUUID()
         const [embedding] = await Promise.all([
             await $fetch("/api/createEmbedding", {
@@ -32,12 +32,12 @@ export const useNote = () => {
         })
     }
 
-    const getNote = async (id: string) => {
+    const get = async (id: string) => {
         const note = await notesRepository.get(id)
         return note
     }
 
-    const getAllNoteStars = async (): Promise<NoteStar[]> => {
+    const getAllStars = async (): Promise<NoteStar[]> => {
         const { points } = await notesCollection.getAll({
             filter: {
                 must: [
@@ -72,5 +72,22 @@ export const useNote = () => {
         return notes
     }
 
-    return { createNote, getNote, getAllNoteStars }
+    const search = async (prompt: string) => {
+        const vector = await $fetch("/api/createEmbedding", {
+            method: "POST",
+            body: {
+                content: prompt
+            }
+        })
+        
+        const notes = await Promise.all((await notesCollection.searchSimilar(vector, 5)).map(async (point) => {
+            if( typeof point.id != "string" ) throw new Error("pointのidが文字型じゃないです")
+            const note = await get(point.id)
+            return note
+        }))
+
+        return notes
+    }
+
+    return { create, get, getAllStars, search }
 }

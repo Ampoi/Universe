@@ -1,6 +1,6 @@
 <template>
     <main
-        class="w-screen h-dvh relative bg-gradient-to-t from-blue-500 via-30% via-blue-950 to-black">
+        class="w-screen h-dvh relative bg-gradient-to-t from-blue-950 to-black">
         <LookUp v-model:show="isLookingUp"/>
         <div
             class="absolute w-full h-full top-0 left-0"
@@ -26,20 +26,7 @@
                 @click="showModal = true">
                 ...
             </button>
-            <div class="grid place-content-center grow relative text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] rounded-lg via-30% overflow-hidden">
-                <div
-                    class="flex flex-row gap-2 items-baseline text-white/60"
-                    v-if="searchPrompt == ''">
-                    <Icon
-                        name="bi:search"
-                        class="text-sm"/>
-                    <p class="font-serif italic text-xl">Search for memo...</p>
-                </div>
-                <input
-                    class="absolute w-full h-full left-0 top-0 outline-none bg-transparent p-4 text-center"
-                    type="text"
-                    v-model="searchPrompt">
-            </div>
+            <Search/>
         </div>
         <Modal v-model:show="showModal"/>
     </main>
@@ -49,8 +36,6 @@ const isWriting = ref(false)
 const showModal = ref(false)
 
 const isLookingUp = ref(false)
-
-const searchPrompt = ref("")
 
 definePageMeta({
   middleware: ["auth"]
