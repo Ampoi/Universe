@@ -7,11 +7,7 @@
             ref="noteArea"/>
         <button
             class="text-white bg-gradient-to-b from-white/15 to-white/10 p-2 border-white/10 border-[1px] rounded-lg via-30%"
-            @click="() => {
-                createNote(note)
-                note = ''
-                isWriting = false
-            }">
+            @click="submit">
             Submit
         </button>
     </div>
@@ -28,4 +24,11 @@ const noteArea = ref<HTMLTextAreaElement>()
 onMounted(() => {
     noteArea.value?.focus()
 })
+
+function submit(){
+    if( note.value == "" ) return
+    createNote(note.value)
+    note.value = ''
+    isWriting.value = false
+}
 </script>

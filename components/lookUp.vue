@@ -71,11 +71,15 @@ watch(isLookingUp, async (newValue) => {
         starCenter.x = (bound.x.min + bound.x.max) / 2
         starCenter.y = (bound.y.min + bound.y.max) / 2
 
-        if( !movableArea.value ) throw new Error("移動可能域の要素が取得できません")
-        magnificationRate.value = Math.min(
-            (movableArea.value.clientWidth - movableAreaPadding*2) / ( bound.x.max - bound.x.min ),
-            (movableArea.value.clientHeight - movableAreaPadding*2) / ( bound.y.max - bound.y.min )
-        )
+        noteStars.value.forEach((star) => {
+            if( !movableArea.value ) throw new Error("移動可能域の要素が取得できません")
+            const initialMagnificationRate = Math.min(
+                (movableArea.value.clientWidth - movableAreaPadding*2) / ( bound.x.max - bound.x.min ),
+                (movableArea.value.clientHeight - movableAreaPadding*2) / ( bound.y.max - bound.y.min )
+            )
+            star.x *= initialMagnificationRate
+            star.y *= initialMagnificationRate
+        })
     }
 })
 
@@ -130,7 +134,7 @@ function onTouchMove(event: TouchEvent){
             )
             const newMagnificationRate = magnificationRate.value * followingLength / previousLength
             const magnificationRateMax = 400
-            const magnificationRateMin = 0.5
+            const magnificationRateMin = 1
             magnificationRate.value =
                 newMagnificationRate < magnificationRateMin ?
                     magnificationRateMin :

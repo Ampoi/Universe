@@ -37,8 +37,8 @@ const showText = computed(() => {
     if( !props.movableArea ) throw new Error("MovableAreaが存在しません");
 
     const isInScreen = (
-        (props.star.x - props.starCenter.x) * props.magnificationRate <= props.movableArea.clientWidth / 2 &&
-        (props.star.y - props.starCenter.y) * props.magnificationRate <= props.movableArea.clientHeight / 2
+        (props.star.x - props.starCenter.x) * props.magnificationRate <= starSize.value + props.movableArea.clientWidth / 2 &&
+        (props.star.y - props.starCenter.y) * props.magnificationRate <= starSize.value + props.movableArea.clientHeight / 2
     )
 
     return isInScreen && 15 < starSize.value
