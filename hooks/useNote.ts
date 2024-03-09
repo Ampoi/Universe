@@ -5,7 +5,6 @@ import { notesCollection } from "~/infra/notesCollection"
 import { v4 as generateUUID } from "uuid"
 
 import * as druid from "@saehrimnir/druidjs";
-import type { NoteWithVector } from "~/models/note";
 
 export const useNote = () => {
     const { auth } = useAuth()
