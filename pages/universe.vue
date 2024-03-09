@@ -20,11 +20,27 @@
         <NoteArea
             v-if="isWriting"
             v-model:writing="isWriting"/>
-        <button
-            class="grid place-content-center size-12 text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] rounded-lg via-30% bottom-8 left-4 absolute z-10"
-            @click="showModal = true">
-            ...
-        </button>
+        <div class="bottom-8 absolute z-10 px-4 w-full flex flex-row gap-4 h-12">
+            <button
+                class="grid place-content-center basis-12 text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] rounded-lg via-30%"
+                @click="showModal = true">
+                ...
+            </button>
+            <div class="grid place-content-center grow relative text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] rounded-lg via-30% overflow-hidden">
+                <div
+                    class="flex flex-row gap-2 items-baseline text-white/60"
+                    v-if="searchPrompt == ''">
+                    <Icon
+                        name="bi:search"
+                        class="text-sm"/>
+                    <p class="font-serif italic text-xl">Search for memo...</p>
+                </div>
+                <input
+                    class="absolute w-full h-full left-0 top-0 outline-none bg-transparent p-4 text-center"
+                    type="text"
+                    v-model="searchPrompt">
+            </div>
+        </div>
         <Modal v-model:show="showModal"/>
     </main>
 </template>
@@ -33,6 +49,8 @@ const isWriting = ref(false)
 const showModal = ref(false)
 
 const isLookingUp = ref(false)
+
+const searchPrompt = ref("")
 
 definePageMeta({
   middleware: ["auth"]
