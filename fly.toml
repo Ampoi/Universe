@@ -6,6 +6,10 @@
 app = 'universe-ampoi'
 primary_region = 'nrt'
 
+[mounts]
+  source = "universe_qdrant"
+  destination = "/data"
+
 [build]
   dockerfile = 'dockerfile'
 
