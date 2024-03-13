@@ -53,23 +53,37 @@ export const useNote = () => {
             with_vector: true
         })
 
-        const Druid = new druid.TSNE(points.map(point => point.vector))
-        const next = Druid.generator()
-
-        let embeds: Float64Array[]
-        for( const newEmbeds of next ){ embeds = newEmbeds }
-
-        const notes = points.map((point, i) => {
-            const embed = embeds[i]
+        if( points.length == 0 ){
+            return []
+        }else if( points.length == 1 ){
+            const point = points[0]
             if( typeof point.id != "string" ) throw new Error("idがStringじゃないです！")
-            return {
-                id: point.id,
-                x: embed[0],
-                y: embed[1]
-            }
-        })
+            return [
+                {
+                    id: point.id,
+                    x: 0,
+                    y: 0
+                }
+            ]
+        }else{
+            const Druid = new druid.TSNE(points.map(point => point.vector))
+            const next = Druid.generator()
 
-        return notes
+            let embeds: Float64Array[]
+            for( const newEmbeds of next ){ embeds = newEmbeds }
+
+            const notes = points.map((point, i) => {
+                const embed = embeds[i]
+                if( typeof point.id != "string" ) throw new Error("idがStringじゃないです！")
+                return {
+                    id: point.id,
+                    x: embed[0],
+                    y: embed[1]
+                }
+            })
+
+            return notes
+        }
     }
 
     const search = async (prompt: string) => {
