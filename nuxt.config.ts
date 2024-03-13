@@ -14,7 +14,8 @@ export default defineNuxtConfig({
     openaiApiKey: "",
     public: {
       qdrant: {
-        url: ""
+        url: "",
+        apiKey: ""
       },
       firebaseConfig: {
         apiKey: "",

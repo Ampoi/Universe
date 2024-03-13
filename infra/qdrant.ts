@@ -1,9 +1,10 @@
 import { QdrantClient } from "@qdrant/js-client-rest";
 
-const runtimeConfig = useRuntimeConfig()
+const { url, apiKey } = useRuntimeConfig().public.qdrant
 const qdrantClient = new QdrantClient({
-    host: runtimeConfig.public.qdrant.url,
-    port: 55000
+    url,
+    apiKey,
+    port: 443
 })
 
 export const createCollection = <T extends Record<string, any>>( collectionName: string ) => {
@@ -14,17 +15,6 @@ export const createCollection = <T extends Record<string, any>>( collectionName:
     }
 
     return {
-        async createCollection(){
-            await qdrantClient.createCollection(collectionName, {
-                vectors: {
-                    size: 1536,
-                    distance: "Dot"
-                }
-            })
-        },
-        async deleteCollection(){
-            await qdrantClient.deleteCollection(collectionName)
-        },
         async createPoints(...points: Point[]){
             await qdrantClient.upsert(collectionName, {
                 points
