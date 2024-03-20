@@ -1,13 +1,12 @@
 import { QdrantClient } from "@qdrant/js-client-rest";
 
-const { url, apiKey } = useRuntimeConfig().public.qdrant
-const qdrantClient = new QdrantClient({
-    url,
-    apiKey,
-    port: 443
-})
-
 export const createCollection = <T extends Record<string, any>>( collectionName: string ) => {
+    const { url, apiKey } = useRuntimeConfig().qdrant
+    const qdrantClient = new QdrantClient({
+        url,
+        apiKey
+    })
+
     type Point = {
         id: string
         vector: number[]

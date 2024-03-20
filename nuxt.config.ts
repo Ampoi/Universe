@@ -12,11 +12,11 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     openaiApiKey: "",
+    qdrant: {
+      url: "",
+      apiKey: ""
+    },
     public: {
-      qdrant: {
-        url: "",
-        apiKey: ""
-      },
       firebaseConfig: {
         apiKey: "",
         authDomain: "",

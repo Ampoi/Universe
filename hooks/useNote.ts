@@ -1,6 +1,5 @@
 import { notesRepository } from "~/infra/notesRepository"
 import { useAuth } from "./useAuth"
-import { notesCollection } from "~/infra/notesCollection"
 
 import { v4 as generateUUID } from "uuid"
 
@@ -25,10 +24,9 @@ export const useNote = () => {
             })  
         ])
 
-        await notesCollection.createPoints({
-            id,
-            vector: embedding,
-            payload: { uid }
+        await $fetch("/api/point/create", {
+            method: "POST",
+            body: { id, embedding, uid }
         })
     }
 
@@ -38,20 +36,13 @@ export const useNote = () => {
     }
 
     const getAllStars = async (): Promise<NoteStar[]> => {
-        const { points } = await notesCollection.getAll({
-            filter: {
-                must: [
-                    {
-                        key: "uid",
-                        match: {
-                            value: uid
-                        }
-                    }
-                ]
-            },
-            with_payload: false,
-            with_vector: true
-        })
+        const points = await $fetch("/api/point/getAll", {
+            method: "POST",
+            body: { uid }
+        }) as {
+            id: string | number
+            vector: number[]
+        }[]
 
         if( points.length == 0 ){
             return []
@@ -87,18 +78,12 @@ export const useNote = () => {
     }
 
     const search = async (prompt: string) => {
-        const vector = await $fetch("/api/createEmbedding", {
+        const noteIDs = await $fetch("/api/point/search", {
             method: "POST",
-            body: {
-                content: prompt
-            }
+            body: { prompt }
         })
-        
-        const notes = await Promise.all((await notesCollection.searchSimilar(vector, 5)).map(async (point) => {
-            if( typeof point.id != "string" ) throw new Error("pointのidが文字型じゃないです")
-            const note = await get(point.id)
-            return note
-        }))
+
+        const notes = await Promise.all(noteIDs.map(async (id) => await get(id)))
 
         return notes
     }
