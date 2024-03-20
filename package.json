@@ -8,7 +8,9 @@
     "host": "nuxt dev --host",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    
+    "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/icon.png"
   },
   "dependencies": {
     "@qdrant/js-client-rest": "^1.8.0",
@@ -23,6 +25,8 @@
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@types/uuid": "^9.0.8",
+    "@vite-pwa/assets-generator": "^0.2.4",
+    "@vite-pwa/nuxt": "^0.6.0",
     "nuxt-icon": "^0.6.9"
   }
 }
