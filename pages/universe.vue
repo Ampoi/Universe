@@ -10,14 +10,19 @@
                     isWriting = !isWriting
                 }
             }">
-            <div
+            <TransitionRoot
+                enter="transition-all delay-100 duration-500"
+                enter-from="opacity-0 blur-xl"
+                enter-to="opacity-100 blur-none"
+                leave="transition-all duration-100"
+                leave-from="opacity-100 blur-none"
+                leave-to="opacity-0 blur-xl"
                 class="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-white/30 font-serif text-5xl text-center leading-[56px]"
-                v-if="!isWriting">
+                :show="!isWriting">
                 Click here to drop piece of your imagination
-            </div>
+            </TransitionRoot>
         </div>
         <NoteArea
-            v-if="isWriting"
             v-model:writing="isWriting"/>
         <div class="bottom-8 absolute z-10 px-4 w-full flex flex-row gap-4 h-12">
             <button
@@ -33,6 +38,8 @@
     </main>
 </template>
 <script setup lang="ts">
+import { TransitionRoot } from "@headlessui/vue"
+
 const isWriting = ref(false)
 const showModal = ref(false)
 
