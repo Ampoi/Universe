@@ -17,7 +17,7 @@
                 leave="transition-all duration-100"
                 leave-from="opacity-100 blur-none"
                 leave-to="opacity-0 blur-xl"
-                class="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-white/30 font-serif text-5xl text-center leading-[56px]"
+                class="absolute -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 text-white/30 font-serif text-5xl text-center leading-[56px] select-none"
                 :show="!isWriting">
                 Click here to drop piece of your imagination
             </TransitionRoot>
