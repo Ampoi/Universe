@@ -9,10 +9,10 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    
     "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/icon.png"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.7.19",
     "@qdrant/js-client-rest": "^1.8.0",
     "@saehrimnir/druidjs": "^0.7.3",
     "firebase": "^10.8.1",
