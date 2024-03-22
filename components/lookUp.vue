@@ -16,6 +16,9 @@
                 :magnification-rate="magnificationRate"
                 :star-center="starCenter"
                 :movable-area="movableArea"/>
+            <p class="absolute bottom-4 right-4 text-lg text-white/40 italic font-serif">
+                {{ noteStars.length }} stars
+            </p>
         </div>
         <button
             class="font-serif text-white/40 italic text-2xl py-4"

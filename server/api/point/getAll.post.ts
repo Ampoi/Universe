@@ -1,7 +1,8 @@
 import { notesCollection } from "~/infra/notesCollection"
 
 export default defineEventHandler(async (event) => {
-    const { uid } = await readBody<{
+    const { uid, limit } = await readBody<{
+        limit: number
         uid: string
     }>(event)
 
@@ -16,6 +17,7 @@ export default defineEventHandler(async (event) => {
                 }
             ]
         },
+        limit,
         with_payload: false,
         with_vector: true
     })

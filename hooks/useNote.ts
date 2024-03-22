@@ -36,9 +36,10 @@ export const useNote = () => {
     }
 
     const getAllStars = async (): Promise<NoteStar[]> => {
+        const limit = 1000
         const points = await $fetch("/api/point/getAll", {
             method: "POST",
-            body: { uid }
+            body: { uid, limit }
         }) as {
             id: string | number
             vector: number[]
