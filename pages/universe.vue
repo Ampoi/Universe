@@ -1,6 +1,5 @@
 <template>
-    <main
-        class="w-screen h-dvh relative bg-gradient-to-t from-blue-950 to-black">
+    <main class="w-screen h-dvh relative bg-gradient-to-t from-blue-950 to-black">
         <LookUp v-model:show="isLookingUp"/>
         <div
             class="absolute w-full h-full top-0 left-0"

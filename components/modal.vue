@@ -7,7 +7,7 @@
         leave="transition-opacity duration-200"
         leave-from="opacity-100"
         leave-to="opacity-0"
-        class="fixed z-10 top-0 left-0 w-full h-full bg-black/20 backdrop-blur-md"
+        class="absolute z-20 top-0 left-0 w-full h-full bg-black/20 backdrop-blur-md"
         as="div"
         @click="show = false"/>
     <TransitionRoot
@@ -18,7 +18,7 @@
         leave="transition duration-300"
         leave-from="translate-y-0"
         leave-to="translate-y-full"
-        class="text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] fixed bottom-0 left-0 w-full z-20 p-4 pb-12 rounded-t-3xl"
+        class="text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] absolute bottom-0 left-0 w-full z-30 p-4 pb-12 rounded-t-3xl"
         as="div">
         <div class="p-4 bg-white/5 border-white/10 border-[1px] rounded-xl">
             <div
