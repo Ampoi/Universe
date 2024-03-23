@@ -29,7 +29,7 @@
                 class="grid place-content-center basis-12 text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] rounded-lg via-30%"
                 @click="showModal = true"
                 v-if="!isSearching">
-                ...
+                <Icon name="bi:three-dots"/>
             </button>
             <Search
                 @update-focus="(isFocused) => isSearching = isFocused"/>
