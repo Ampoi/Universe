@@ -1,5 +1,5 @@
 <template>
-    <div class="grid place-content-center grow relative text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] rounded-lg via-30%">
+    <div class="grid place-content-center grow relative glass-block">
         <div
             v-if="searchResults"
             class="absolute w-full -translate-y-[calc(100%+1rem)] max-h-40 overflow-scroll rounded-lg">

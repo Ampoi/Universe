@@ -26,7 +26,7 @@
             v-model:writing="isWriting"/>
         <div class="bottom-8 absolute z-10 px-4 w-full flex flex-row gap-4 h-12">
             <button
-                class="grid place-content-center basis-12 text-white bg-gradient-to-b from-white/15 to-white/10 border-white/10 border-[1px] rounded-lg via-30%"
+                class="grid place-content-center basis-12 glass-block"
                 @click="showModal = true"
                 v-if="!isSearching">
                 <Icon name="bi:three-dots"/>
