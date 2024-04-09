@@ -8,17 +8,20 @@
         leave-to="opacity-0 blur-xl"
         @after-enter="noteArea?.focus()"
         :show="isWriting"
-        class="absolute w-full top-1/2 -translate-y-1/2 left-0 p-4 flex flex-col items-center"
+        class="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-full px-4"
         as="div">
-        <textarea
-            v-model="note"
-            class="glass-block px-4 py-6 text-center outline-none !text-white basis-60 resize-none w-full bg-transparent !rounded-xl"
-            ref="noteArea"/>
-        <button
-            class="glass-block grid place-content-center py-2 px-6 font-serif italic text-lg -mt-4 backdrop-blur-lg"
-            @click="submit">
-            Submit
-        </button>
+        <div class="w-full h-60 relative">
+            <textarea
+                v-model="note"
+                class="absolute top-0 left-0 glass-block px-4 py-6 text-center outline-none !text-white resize-none h-full w-full bg-transparent !rounded-xl"
+                ref="noteArea"/>
+            <button
+                class="absolute -bottom-6 left-1/2 -translate-x-1/2 glass-block grid place-content-center py-2 px-6 font-serif italic text-lg -mt-4 backdrop-blur-lg"
+                v-if="note != ''"
+                @click="submit">
+                Submit
+            </button>
+        </div>
     </TransitionRoot>
 </template>
 <script setup lang="ts">
