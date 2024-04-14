@@ -1,5 +1,5 @@
 <template>
-    <main class="flex flex-col w-screen">
+    <main class="flex flex-col w-screen bg-white">
         <div class="h-screen grid place-content-center">
             <div class="flex flex-col items-center">
                 <h1 class="italic text-7xl font-serif">Universe.</h1>
