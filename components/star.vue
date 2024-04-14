@@ -5,9 +5,15 @@
             left: `calc(${(star.x - starCenter.x) * magnificationRate}px + 50%)`,
             top:  `calc(${(star.y - starCenter.y) * magnificationRate}px + 50%)`,
         }">
-        <p
+        <div
             v-if="showText"
-            class="text-white text-center">{{ note ? note.content : "undefined!!!" }}</p>
+            class="w-52 relative">
+            <div
+                class="bg-black/60 blur-md w-full h-full absolute top-0 left-0 -z-10 rounded-2xl"/>
+            <p class="!text-white text-center p-4 w-full h-full top-0 left-0">
+                {{ note ? note.content : "undefined!!!" }}
+            </p>
+        </div>
         <div
             v-else
             class="size-0.5 rounded-full bg-white"
