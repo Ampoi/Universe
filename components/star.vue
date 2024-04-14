@@ -7,10 +7,10 @@
         }">
         <div
             v-if="showText"
-            class="w-52 relative">
+            class="w-52 relative max-h-32 overflow-hidden p-4">
             <div
                 class="bg-black/60 blur-md w-full h-full absolute top-0 left-0 -z-10 rounded-2xl"/>
-            <p class="!text-white text-center p-4 w-full h-full top-0 left-0">
+            <p class="!text-white text-center w-full h-full">
                 {{ note ? note.content : "undefined!!!" }}
             </p>
         </div>
