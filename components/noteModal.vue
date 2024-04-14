@@ -16,6 +16,7 @@
 </template>
 <script setup lang="ts">
 import { useNote } from '~/hooks/useNote';
+import { format } from "@formkit/tempo"
 
 const props = defineProps<{
     showNoteModalID?: string
@@ -23,7 +24,7 @@ const props = defineProps<{
 
 const note = ref<{
     content: string
-    createdAt: Date
+    createdAt: string
 } | undefined>()
 
 const { get } = useNote()
@@ -36,7 +37,7 @@ watch(() => props.showNoteModalID, async (id) => {
     const newNote = await get(id)
     note.value = {
         content: newNote.content,
-        createdAt: newNote.createdAt.toDate()
+        createdAt: format(newNote.createdAt.toDate(), "YYYY年MM月DD日 H:mm")
     }
 })
 

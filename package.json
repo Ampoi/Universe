@@ -12,6 +12,7 @@
     "generate-pwa-assets": "pwa-assets-generator --preset minimal-2023 public/icon.png"
   },
   "dependencies": {
+    "@formkit/tempo": "^0.0.19",
     "@headlessui/vue": "^1.7.19",
     "@qdrant/js-client-rest": "^1.8.0",
     "@saehrimnir/druidjs": "^0.7.3",
