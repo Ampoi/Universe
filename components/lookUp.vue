@@ -12,10 +12,11 @@
             @touchcancel="endTouching">
             <Star
                 v-for="star in noteStars"
-                :star="star"
-                :magnification-rate="magnificationRate"
-                :star-center="starCenter"
-                :movable-area="movableArea"/>
+                :star
+                :magnificationRate
+                :starCenter
+                :movableArea
+                :movableAreaRect/>
             <p class="absolute bottom-4 right-4 text-lg text-white/40 italic font-serif">
                 {{ noteStars.length }} stars
             </p>
@@ -39,8 +40,22 @@ const noteStars = ref<NoteStar[]>([])
 
 const starCenter = reactive({x: 0, y: 0})
 const magnificationRate = ref(1)
+
 const movableArea = ref<HTMLElement>()
 const movableAreaPadding = 80
+const movableAreaRect = reactive({
+    height: 0,
+    width: 0
+})
+
+onMounted(() => {
+    if( !movableArea.value ) throw new Error("移動可能エリアが存在しません！")
+    const resizeObserver = new ResizeObserver((entries) => {
+        movableAreaRect.height = entries[0].contentRect.height
+        movableAreaRect.width = entries[0].contentRect.width
+    })
+    resizeObserver.observe(movableArea.value)
+})
 
 watch(isLookingUp, async (newValue) => {
     if( newValue ){

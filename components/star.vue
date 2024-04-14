@@ -2,9 +2,10 @@
     <div
         class="absolute -translate-x-1/2 -translate-y-1/2"
         :style="{
-            left: `calc(${(star.x - starCenter.x) * magnificationRate}px + 50%)`,
-            top:  `calc(${(star.y - starCenter.y) * magnificationRate}px + 50%)`,
-        }">
+            left: `calc(${starRenderPosition.x}px + 50%)`,
+            top:  `calc(${starRenderPosition.y}px + 50%)`,
+        }"
+        v-if="showStar">
         <div
             v-if="showText"
             class="w-52 relative max-h-32 overflow-hidden p-4">
@@ -31,12 +32,38 @@ const props = defineProps<{
     starCenter: Record<"x" | "y", number>
     magnificationRate: number
     movableArea: HTMLElement | undefined
+    movableAreaRect: Record<"height" | "width", number>
 }>()
+
+const starRenderPosition = computed(() => {
+    return {
+        x: (props.star.x - props.starCenter.x) * props.magnificationRate,
+        y: (props.star.y - props.starCenter.y) * props.magnificationRate
+    }
+})
 
 const starSize = computed(() => {
     const size = props.magnificationRate
     const min = 1
     return size < min ? min : size
+})
+
+const starMaxSize = {
+    height: 128,
+    width: 208
+} as const
+
+const showStar = computed(() => {
+    const { x, y } = starRenderPosition.value
+    const showRange = {
+        height: (starMaxSize.height + props.movableAreaRect.height) / 2,
+        width: (starMaxSize.width + props.movableAreaRect.width) / 2
+    } as const
+    
+    return (
+        (-showRange.height <= y && y <= showRange.height) &&
+        (-showRange.width <= x && x <= showRange.width)
+    )
 })
 
 const showText = computed(() => {
