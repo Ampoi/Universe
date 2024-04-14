@@ -20,6 +20,12 @@
             <p class="absolute bottom-4 right-4 text-lg text-white/40 italic font-serif">
                 {{ noteStars.length }} stars
             </p>
+            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-32px)] h-[calc(100%-128px)] glass-block px-6 py-8 rounded-3xl backdrop-blur-md grid place-content-center">
+                <div class="text-center">
+                    <h2 class="text-xl py-4 text-white">メモメモメモメモメモメモメモ</h2>
+                    <p class="text-sm">2024/12/10 23:52</p>
+                </div>
+            </div>
         </div>
         <button
             class="font-serif text-white/40 italic text-2xl py-4"

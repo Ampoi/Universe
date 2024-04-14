@@ -6,15 +6,16 @@
             top:  `calc(${starRenderPosition.y}px + 50%)`,
         }"
         v-if="showStar">
-        <div
+        <button
             v-if="showText"
-            class="w-52 relative max-h-32 overflow-hidden p-4">
+            class="w-52 relative max-h-32 overflow-hidden p-4"
+            @click="emit('openStarModal', props.star.id)">
             <div
                 class="bg-black/60 blur-md w-full h-full absolute top-0 left-0 -z-10 rounded-2xl"/>
             <p class="!text-white text-center w-full h-full">
                 {{ note ? note.content : "undefined!!!" }}
             </p>
-        </div>
+        </button>
         <div
             v-else
             class="size-0.5 rounded-full bg-white"
@@ -35,6 +36,10 @@ const props = defineProps<{
     movableAreaRect: Record<"height" | "width", number>
 }>()
 
+const emit = defineEmits<{
+    (e: "openStarModal", starID: string): void
+}>()
+
 const starRenderPosition = computed(() => {
     return {
         x: (props.star.x - props.starCenter.x) * props.magnificationRate,
@@ -48,7 +53,7 @@ const starSize = computed(() => {
     return size < min ? min : size
 })
 
-const starMaxSize = {
+const starMaxRect = {
     height: 128,
     width: 208
 } as const
@@ -56,8 +61,8 @@ const starMaxSize = {
 const showStar = computed(() => {
     const { x, y } = starRenderPosition.value
     const showRange = {
-        height: (starMaxSize.height + props.movableAreaRect.height) / 2,
-        width: (starMaxSize.width + props.movableAreaRect.width) / 2
+        height: (starMaxRect.height + props.movableAreaRect.height) / 2,
+        width: (starMaxRect.width + props.movableAreaRect.width) / 2
     } as const
     
     return (
@@ -67,14 +72,7 @@ const showStar = computed(() => {
 })
 
 const showText = computed(() => {
-    if( !props.movableArea ) throw new Error("MovableAreaが存在しません");
-
-    const isInScreen = (
-        (props.star.x - props.starCenter.x) * props.magnificationRate <= starSize.value + props.movableArea.clientWidth / 2 &&
-        (props.star.y - props.starCenter.y) * props.magnificationRate <= starSize.value + props.movableArea.clientHeight / 2
-    )
-
-    return isInScreen && 8 < starSize.value
+    return 8 < starSize.value
 })
 
 const note = ref<Note>()
