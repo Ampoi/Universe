@@ -11,7 +11,9 @@
             class="w-52 relative max-h-32 overflow-hidden p-4"
             @click="emit('openStarModal', props.star.id)">
             <div
-                class="bg-black/60 blur-md w-full h-full absolute top-0 left-0 -z-10 rounded-2xl"/>
+                class="blur-md w-full h-full absolute top-0 left-0 -z-10 rounded-2xl">
+                <div class="backdrop-blur-md w-full h-full"/>
+            </div>
             <p class="!text-white text-center w-full h-full">
                 {{ note ? note.content : "undefined!!!" }}
             </p>

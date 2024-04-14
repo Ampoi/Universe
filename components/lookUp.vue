@@ -1,31 +1,30 @@
 <template>
     <div
-        class="absolute w-full flex flex-col rounded-b-3xl z-20 transition-all duration-300 bg-black/60 backdrop-blur-lg border-x-[1px] border-b-[1px] border-black"
+        class="absolute w-full flex flex-col rounded-b-3xl z-20 transition-all backdrop-blur-lg duration-300 bg-black/40 border-x-[1px] border-b-[1px] border-black"
         :class="{
             '-translate-y-[calc(100dvh-10rem)]': !isLookingUp
         }">
-        <div
-            class="h-[calc(100dvh-10rem)] w-full relative overflow-hidden"
-            ref="movableArea"
-            @touchmove="onTouchMove"
-            @touchend="endTouching"
-            @touchcancel="endTouching">
-            <Star
-                v-for="star in noteStars"
-                :star
-                :magnificationRate
-                :starCenter
-                :movableArea
-                :movableAreaRect/>
-            <p class="absolute bottom-4 right-4 text-lg text-white/40 italic font-serif">
-                {{ noteStars.length }} stars
-            </p>
-            <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[calc(100%-32px)] h-[calc(100%-128px)] glass-block px-6 py-8 rounded-3xl backdrop-blur-md grid place-content-center">
-                <div class="text-center">
-                    <h2 class="text-xl py-4 text-white">メモメモメモメモメモメモメモ</h2>
-                    <p class="text-sm">2024/12/10 23:52</p>
-                </div>
+        <div class="h-[calc(100dvh-10rem)] w-full relative">
+            <div
+                class="h-full w-full relative overflow-hidden"
+                ref="movableArea"
+                @touchmove="onTouchMove"
+                @touchend="endTouching"
+                @touchcancel="endTouching">
+                <Star
+                    v-for="star in noteStars"
+                    :star
+                    :magnificationRate
+                    :starCenter
+                    :movableArea
+                    :movableAreaRect
+                    @openStarModal="(id) => showNoteModalID = id"/>
+                <p class="absolute bottom-4 right-4 text-lg text-white/40 italic font-serif">
+                    {{ noteStars.length }} stars
+                </p>
             </div>
+            <NoteModal
+                v-model:showNoteModalID="showNoteModalID"/>
         </div>
         <button
             class="font-serif text-white/40 italic text-2xl py-4"
@@ -53,6 +52,8 @@ const movableAreaRect = reactive({
     height: 0,
     width: 0
 })
+
+const showNoteModalID = ref<string>()
 
 onMounted(() => {
     if( !movableArea.value ) throw new Error("移動可能エリアが存在しません！")

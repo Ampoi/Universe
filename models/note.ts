@@ -1,3 +1,5 @@
+import type { Timestamp } from "firebase/firestore"
+
 export type NoteStar = {
     id: string
     x: number
@@ -6,5 +8,5 @@ export type NoteStar = {
 
 export type Note = {
     content: string
-    createdAt: Date
+    createdAt: Timestamp
 }
