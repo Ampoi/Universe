@@ -5,6 +5,7 @@ import { v4 as generateUUID } from "uuid"
 
 import * as druid from "@saehrimnir/druidjs";
 import type { NoteStar } from "~/models/note";
+import { Timestamp } from "firebase/firestore";
 
 export const useNote = () => {
     const { auth } = useAuth()
@@ -20,7 +21,7 @@ export const useNote = () => {
             }),
             await notesRepository.set(id, {
                 content,
-                createdAt: new Date()
+                createdAt: Timestamp.now()
             })  
         ])
 

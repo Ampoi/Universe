@@ -2,9 +2,6 @@
 export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss", "nuxt-icon", "@vite-pwa/nuxt"],
   css: ["~/assets/main.css"],
-  nitro: {
-    preset: "vercel"
-  },
   app: {
     head: {
       link: [
@@ -44,6 +41,7 @@ export default defineNuxtConfig({
       start_url: "/universe",
       display: "standalone",
       background_color: "#000000",
+      theme_color: "#000000",
       icons: [
         {
           "src": "pwa-64x64.png",
